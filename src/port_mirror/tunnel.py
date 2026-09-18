@@ -165,8 +165,11 @@ class Tunnel:
         except OSError as exc:
             log.warning(
                 "%s:%d is not reachable from here (%s); if remote clients cannot connect, "
-                "check that 'GatewayPorts yes' is set in sshd_config on %s and that a "
-                "firewall is not blocking the port",
+                "on server B (%s), run 'sudo nano /etc/ssh/sshd_config' and set "
+                "'GatewayPorts yes', then run 'sudo sshd -t && sudo systemctl reload ssh' "
+                "(use 'sshd' instead of 'ssh' if that is the service name). "
+                "Restart the CLI on server A to reconnect, and check that a firewall "
+                "is not blocking the port",
                 config.host,
                 mapping.remote_port,
                 exc,
